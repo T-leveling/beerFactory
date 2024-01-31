@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BreweryDAO {
 
-    void addBrewery(Brewery brewery);
+    void insertBrewery(Brewery brewery);
 
     List<Beer> getAll();
 }

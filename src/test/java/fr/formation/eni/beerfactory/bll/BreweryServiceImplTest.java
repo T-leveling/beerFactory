@@ -1,4 +1,4 @@
-package fr.formation.eni.beerfactory.dal;
+package fr.formation.eni.beerfactory.bll;
 
 import fr.formation.eni.beerfactory.bo.Brewery;
 import org.junit.jupiter.api.Test;
@@ -9,14 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 
 @SpringBootTest
-class BreweryDAOImplTest {
+class BreweryServiceImplTest {
 
-    @Autowired
-    BreweryDAO breweryDAO;
+@Autowired
+BreweryService service;
     @Test
     @Transactional
-    void addBrewery() {
+    void contextLoads() {
         Brewery brewery = new Brewery("le chaudron", "rue de la soif", "LAT 325870; LONG 2548285", LocalDate.now().minusYears(5));
-        breweryDAO.insertBrewery(brewery);
+        service.addBrewery(brewery);
+
+
     }
 }

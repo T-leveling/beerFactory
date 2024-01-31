@@ -27,7 +27,7 @@ public class BreweryDAOImpl implements BreweryDAO {
     NamedParameterJdbcTemplate jdbcTemplate;
 
     @Override
-    public void addBrewery(Brewery brewery) {
+    public void insertBrewery(Brewery brewery) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("name", brewery.getName());

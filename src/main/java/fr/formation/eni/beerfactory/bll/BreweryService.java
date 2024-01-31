@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BreweryService {
 
-    void addBrewery(Brewery brewery);
+    void addBrewery(Brewery brewery) throws BreweryServiceException;
 
     List<Beer> getAllBeers();
 }

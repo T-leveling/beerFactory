@@ -12,12 +12,12 @@ import java.time.LocalDate;
 class BreweryServiceImplTest {
 
 @Autowired
-BreweryService service;
+BreweryService breweryService;
     @Test
     @Transactional
-    void contextLoads() {
+    void contextLoads() throws BreweryServiceException {
         Brewery brewery = new Brewery("le chaudron", "rue de la soif", "LAT 325870; LONG 2548285", LocalDate.now().minusYears(5));
-        service.addBrewery(brewery);
+        breweryService.addBrewery(brewery);
 
 
     }

@@ -17,7 +17,7 @@ public class BreweryServiceImpl implements BreweryService {
     @Override
     public void addBrewery(Brewery brewery) {
         dao.insertBrewery(brewery);
-        //System.out.println("test de l'ajout dans le service : " + brewery);
+        //System.out.println("test de l'ajout dans le breweryService : " + brewery);
     }
 
     @Override

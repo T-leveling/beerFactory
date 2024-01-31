@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,11 +17,17 @@ public class Brewery {
     private String address;
     private String gpsCoordinates;
     private LocalDate openningDate;
+    private List<Beer> beers;
+
+    {
+        beers = new ArrayList<>();
+    }
 
     public Brewery(String name, String address, String gpsCoordinates, LocalDate openningDate) {
         this.name = name;
         this.address = address;
         this.gpsCoordinates = gpsCoordinates;
         this.openningDate = openningDate;
+        beers = new ArrayList<>();
     }
 }

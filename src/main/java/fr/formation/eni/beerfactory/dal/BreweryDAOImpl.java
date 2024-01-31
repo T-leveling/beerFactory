@@ -3,6 +3,7 @@ package fr.formation.eni.beerfactory.dal;
 import fr.formation.eni.beerfactory.bo.Beer;
 import fr.formation.eni.beerfactory.bo.Brewery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,9 +24,11 @@ public class BreweryDAOImpl implements BreweryDAO {
                     rs.getString("gps_coordinates"),
                     rs.getDate("openning_date").toLocalDate());
 
+    private final String INSERT_DATA = "INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gps_coordinates, :openning_date)";
+    private final String FIND_ALL    = "SELECT id_beer, name, beer_type, description, alcool_degree, note, id_brewery FROM BEER INNER JOIN BREWERY ON BEER.id_brewery = BREWERY.id_brewery";
+
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
-
     @Override
     public void addBrewery(Brewery brewery) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -34,8 +37,8 @@ public class BreweryDAOImpl implements BreweryDAO {
         namedParameters.addValue("address", brewery.getAddress());
         namedParameters.addValue("gps_coordinates", brewery.getGpsCoordinates());
         namedParameters.addValue("openning_date", java.sql.Date.valueOf(brewery.getOpenningDate()));
-        jdbcTemplate.update("INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gps_coordinates, :openning_date)", namedParameters, keyHolder);
-        if (keyHolder != null && keyHolder.getKey() != null) {
+        jdbcTemplate.update(INSERT_DATA, namedParameters, keyHolder);
+        if (keyHolder.getKey() != null) {
             brewery.setIdBrewery(keyHolder.getKey().intValue());
         }
 //TODO a supprimer
@@ -44,6 +47,6 @@ public class BreweryDAOImpl implements BreweryDAO {
 
     @Override
     public List<Beer> getAll() {
-        return null;
+        return jdbcTemplate.query(FIND_ALL, new BeanPropertyRowMapper<>(Beer.class));
     }
 }

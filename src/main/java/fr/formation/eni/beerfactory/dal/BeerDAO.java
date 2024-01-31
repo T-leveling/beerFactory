@@ -5,9 +5,9 @@ import fr.formation.eni.beerfactory.bo.Brewery;
 
 import java.util.List;
 
-public interface BreweryDAO {
+public interface BeerDAO {
 
-    void addBrewery(Brewery brewery);
+    void addBeer(Beer beer);
 
-    List<Beer> getAll(int idBrewery);
+    List<Beer> getAll();
 }

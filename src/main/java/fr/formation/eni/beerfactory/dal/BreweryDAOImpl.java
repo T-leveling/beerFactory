@@ -2,9 +2,7 @@ package fr.formation.eni.beerfactory.dal;
 
 import fr.formation.eni.beerfactory.bo.Beer;
 import fr.formation.eni.beerfactory.bo.Brewery;
-import fr.formation.eni.beerfactory.dal.rowmapper.BreweryRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -20,12 +18,19 @@ public class BreweryDAOImpl implements BreweryDAO {
     // Map fields name from database with attributs name of bean
 
     private final String INSERT_DATA = "INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gps_coordinates, :openning_date)";
-    private final String FIND_ALL = "";
+    private final String FIND_ALL = "SELECT * FROM BEER";
 
 
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
+   
 
+    RowMapper<Brewery> breweryRowMapper = (rs, i) ->
+            new Brewery(rs.getInt("id_brewery"),
+                    rs.getString("name"),
+                    rs.getString("address"),
+                    rs.getString("gps_coordinates"),
+                    rs.getDate("openning_date").toLocalDate());
 
     @Override
     public void addBrewery(Brewery brewery) {
@@ -45,7 +50,33 @@ public class BreweryDAOImpl implements BreweryDAO {
 
     @Override
     public List<Beer> getAll(int idBrewery) {
-return null;
-      // return jdbcTemplate.query(FIND_ALL, new BreweryRowMapper(), idBrewery);
+        return null;
+//       return jdbcTemplate.query(FIND_ALL, breweryRowMapper, idBrewery);
+    }
+
+    @Override
+    public Brewery findById(int id) {
+        String findById = "SELECT * FROM BREWERY WHERE id = :id_brewery";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("id_brewery", id);
+
+        return jdbcTemplate.queryForObject(findById, namedParameters, breweryRowMapper);
+    }
+
+    @Override
+    public void setBeerToBrewery(Beer beer, Brewery brewery) {
+        String setBeerToBrewery = "INSERT INTO BREWERY (id_brewery, id_beer) VALUES (:id_brewery, :id_beer)";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("id_brewery", brewery.getIdBrewery());
+        namedParameters.addValue("id_beer", beer.getBeerId());
+
+        List<Beer> beers = brewery.getBeers();
+
+        beers.add(beer);
+
+        jdbcTemplate.update(setBeerToBrewery, namedParameters);
+
     }
 }

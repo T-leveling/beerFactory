@@ -17,7 +17,7 @@ BeerDAO beerDAO;
     void addBeer() {
         Brewery brewery = new Brewery("le chaudron", "rue de la soif", "LAT 325870; LONG 2548285", LocalDate.now().minusYears(5));
 
-        Beer beer1 = new Beer("Castel", "Blonde", "Bonne bière", 4, 2, brewery);
+        Beer beer1 = new Beer("Castel", "Blonde", "Bonne bière", 4, 2);
 
         beerDAO.addBeer(beer1);
     }

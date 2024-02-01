@@ -9,7 +9,7 @@ public interface BreweryDAO {
 
     void addBrewery(Brewery brewery);
 
-    List<Beer> getAll(int idBrewery);
+
 
     Brewery findById(int id);
 

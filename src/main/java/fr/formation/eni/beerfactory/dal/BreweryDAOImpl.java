@@ -18,20 +18,20 @@ public class BreweryDAOImpl implements BreweryDAO {
     // Map fields name from database with attributs name of bean
 
     private final String INSERT_DATA = "INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gps_coordinates, :openning_date)";
-    private final String FIND_ALL = "SELECT * FROM BEER";
 
 
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
    
 
-    RowMapper<Brewery> breweryRowMapper = (rs, i) ->
-            new Brewery(rs.getInt("id_brewery"),
-                    rs.getString("name"),
-                    rs.getString("address"),
-                    rs.getString("gps_coordinates"),
-                    rs.getDate("openning_date").toLocalDate());
-
+    RowMapper<Brewery> breweryRowMapper = (rs, i) -> {
+        Brewery b = new Brewery(rs.getInt("id_brewery"),
+                rs.getString("name"),
+                rs.getString("address"),
+                rs.getString("gps_coordinates"),
+                rs.getDate("openning_date").toLocalDate());
+    return b;
+    };
     @Override
     public void addBrewery(Brewery brewery) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -46,12 +46,6 @@ public class BreweryDAOImpl implements BreweryDAO {
         }
 //TODO a supprimer
         System.out.println("Brewery building : " + brewery);
-    }
-
-    @Override
-    public List<Beer> getAll(int idBrewery) {
-        return null;
-//       return jdbcTemplate.query(FIND_ALL, breweryRowMapper, idBrewery);
     }
 
     @Override

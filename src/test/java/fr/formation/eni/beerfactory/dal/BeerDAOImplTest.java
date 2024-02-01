@@ -19,6 +19,8 @@ BeerDAO beerDAO;
 
         Beer beer1 = new Beer("Castel", "Blonde", "Bonne bière", 4, 2);
 
+        beer1.setBrewery(brewery);
+
         beerDAO.addBeer(beer1);
     }
 }

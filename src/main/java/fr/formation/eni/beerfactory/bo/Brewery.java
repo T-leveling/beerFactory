@@ -83,5 +83,16 @@ public class Brewery implements Serializable {
         return beers;
     }
 
-
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Brewery{");
+        sb.append("idBrewery=").append(idBrewery);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", gpsCoordinates='").append(gpsCoordinates).append('\'');
+        sb.append(", openningDate=").append(openningDate);
+        sb.append(", beers=").append(beers);
+        sb.append('}');
+        return sb.toString();
+    }
 }

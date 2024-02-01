@@ -89,4 +89,18 @@ public class Beer implements Serializable {
     public void setBrewery(Brewery brewery) {
         this.brewery = brewery;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Beer{");
+        sb.append("beerId=").append(beerId);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", beerType='").append(beerType).append('\'');
+        sb.append(", description='").append(description).append('\'');
+        sb.append(", alcoolDegree=").append(alcoolDegree);
+        sb.append(", note=").append(note);
+        sb.append(", brewery=").append(brewery);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -27,9 +27,9 @@ class BreweryDAOImplTest {
         Brewery brewery = new Brewery("le chaudron", "rue de la soif", "LAT 325870; LONG 2548285", LocalDate.now().minusYears(5));
 
 
-        Beer beer1 = new Beer("Castel", "Blonde", "Bonne bière", 4, 2, brewery);
-        Beer beer2 = new Beer("Kronnenburg", "Blonde", "Assez bonne bière", 5, 4, brewery);
-        Beer beer3 = new Beer("IPA", "Blonde", "Très bonne bière", 6, 5, brewery);
+        Beer beer1 = new Beer("Castel", "Blonde", "Bonne bière", 4, 2);
+        Beer beer2 = new Beer("Kronnenburg", "Blonde", "Assez bonne bière", 5, 4);
+        Beer beer3 = new Beer("IPA", "Blonde", "Très bonne bière", 6, 5);
         List<Beer> beers = new ArrayList<>();
         beers.add(beer1);
         beers.add(beer2);

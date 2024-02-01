@@ -44,6 +44,7 @@ public class BeerDAOImpl implements BeerDAO {
         namedParameters.addValue("description", beer.getDescription());
         namedParameters.addValue("alcool_degree", beer.getAlcoolDegree());
         namedParameters.addValue("note", beer.getNote());
+        namedParameters.addValue("id_brewery",beer.getBrewery().getIdBrewery());
         jdbcTemplate.update(INSERT_BEER, namedParameters, keyHolder);
         if (keyHolder.getKey() != null) {
             beer.setBeerId(keyHolder.getKey().intValue());
@@ -55,7 +56,8 @@ public class BeerDAOImpl implements BeerDAO {
 
     @Override
     public List<Beer> getAll() {
-        // return jdbcTemplate.query();
-        return null;
+        String sql = "SELECT * FROM BEER";
+        return jdbcTemplate.query(sql, beerRowMapper);
+
     }
 }

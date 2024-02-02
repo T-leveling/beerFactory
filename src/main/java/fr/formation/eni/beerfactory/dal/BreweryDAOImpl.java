@@ -17,7 +17,7 @@ public class BreweryDAOImpl implements BreweryDAO {
 
     // Map fields name from database with attributs name of bean
 
-    private final String INSERT_DATA = "INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gps_coordinates, :openning_date)";
+    private final String INSERT_DATA = "INSERT INTO BREWERY (name, address, gps_coordinates, openning_date) VALUES (:name, :address, :gpsCoordinates, :openningDate)";
 
 
     @Autowired
@@ -60,7 +60,7 @@ public class BreweryDAOImpl implements BreweryDAO {
 
     @Override
     public void setBeerToBrewery(Beer beer, Brewery brewery) {
-        String setBeerToBrewery = "INSERT INTO BREWERY (id_brewery, id_beer) VALUES (:id_brewery, :id_beer)";
+        String setBeerToBrewery = "INSERT INTO BREWERY (id_brewery, id_beer) VALUES (:idBrewery, :idBeer)";
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
         namedParameters.addValue("id_brewery", brewery.getIdBrewery());
@@ -71,6 +71,5 @@ public class BreweryDAOImpl implements BreweryDAO {
         beers.add(beer);
 
         jdbcTemplate.update(setBeerToBrewery, namedParameters);
-
     }
 }
